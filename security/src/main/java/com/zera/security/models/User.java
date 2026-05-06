@@ -1,34 +1,38 @@
 package com.zera.security.models;
 
-import jakarta.persistence.Entity;
-import org.jspecify.annotations.Nullable;
+import com.zera.security.enums.SecurityEnum;
+import jakarta.persistence.*;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
 @Entity
+@Table(name = "USERS")
+@Data
 public class User implements UserDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String login;
     private String password;
-
+    private SecurityEnum securityEnum;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
+        if(this.securityEnum == SecurityEnum.ADMIN) return
+                List.of(new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("USER"));
 
-    @Override
-    public @Nullable String getPassword() {
-        return password;
+        else return List.of(new SimpleGrantedAuthority("USER"));
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return login;
     }
 
     @Override

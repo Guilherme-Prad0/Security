@@ -11,26 +11,19 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/produtos")
+@RequestMapping(path = "/produtos")
 public class SecurityController {
 
     @Autowired
     private SecurityService securityService;
 
     @GetMapping
-    public ResponseEntity<List<SecurityModel>> findAll() {
-        List<SecurityModel> request = securityService.buscarTodos();
-        return ResponseEntity.ok().body(request);
+    public List<SecurityModel> findAll() {
+        return securityService.buscarTodos();
     }
 
     @PostMapping
-    public ResponseEntity<SecurityModel> criarProduto(@RequestBody SecurityModel Model) {
-        SecurityModel request = securityService.criarProduto(Model);
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{api/produtos}")
-                .buildAndExpand(Model.getId())
-                .toUri();
-        return ResponseEntity.created(uri).body(request);
+    public SecurityModel criarProduto(@RequestBody SecurityModel Model) {
+        return securityService.criarProduto(Model);
     }
 }
