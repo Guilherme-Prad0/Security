@@ -1,5 +1,5 @@
 package com.zera.security.enums;
 
-public enum SecurityEnum {
+public enum UserRole {
     ADMIN,USER;
 }

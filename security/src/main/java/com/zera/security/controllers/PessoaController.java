@@ -1,7 +1,7 @@
 package com.zera.security.controllers;
 
-import com.zera.security.models.SecurityModel;
-import com.zera.security.services.SecurityService;
+import com.zera.security.models.PessoaModel;
+import com.zera.security.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,18 +9,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/produtos")
-public class SecurityController {
+public class PessoaController {
 
     @Autowired
-    private SecurityService securityService;
+    private PessoaService securityService;
 
     @GetMapping
-    public List<SecurityModel> findAll() {
+    public List<PessoaModel> findAll() {
         return securityService.buscarTodos();
     }
 
     @PostMapping
-    public SecurityModel criarProduto(@RequestBody SecurityModel Model) {
+    public PessoaModel criarProduto(@RequestBody PessoaModel Model) {
         return securityService.criarProduto(Model);
     }
 }

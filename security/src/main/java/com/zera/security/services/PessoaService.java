@@ -1,23 +1,23 @@
 package com.zera.security.services;
 
-import com.zera.security.models.SecurityModel;
-import com.zera.security.repositories.SecurityRepository;
+import com.zera.security.models.PessoaModel;
+import com.zera.security.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SecurityService {
+public class PessoaService {
 
     @Autowired
-    private SecurityRepository securityRepository;
+    private PessoaRepository securityRepository;
 
-    public List<SecurityModel> buscarTodos (){
+    public List<PessoaModel> buscarTodos (){
         return securityRepository.findAll();
     }
 
-    public SecurityModel criarProduto(SecurityModel securityModel) {
+    public PessoaModel criarProduto(PessoaModel securityModel) {
         return securityRepository.save(securityModel);
     }
 

@@ -1,6 +1,6 @@
 package com.zera.security.models;
 
-import com.zera.security.enums.SecurityEnum;
+import com.zera.security.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,11 +20,11 @@ public class User implements UserDetails {
     private Long id;
     private String login;
     private String password;
-    private SecurityEnum securityEnum;
+    private UserRole securityEnum;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.securityEnum == SecurityEnum.ADMIN) return
+        if(this.securityEnum == UserRole.ADMIN) return
                 List.of(new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("USER"));
 
         else return List.of(new SimpleGrantedAuthority("USER"));
